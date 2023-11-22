@@ -1,5 +1,7 @@
 import numpy as np
 import time
+import sys
+sys.set_int_max_str_digits(999999999)
 
 DIGITS = int(input("How many digits of pi do you require?: "))
 
@@ -30,6 +32,7 @@ def pi_digits(x):
                     tbf = ips / (x / 1000)
                     tbf = x / tbf
                     tbf *= 1.05
+                    tbf += tbf * 0.15
                     print(f"Estimated {tbf:.2f} seconds till finish.\n")
                 print(f"Elapsed time: {totaltime:.2f} out of {tbf:.2f}")
                 print(f"Percentage finished: {goes / DIGITS * 100:.2f}%\n")

@@ -1,4 +1,9 @@
+import os
+import textwrap
+
 wrap = 4
+
+
 
 with open('pi100000.dat') as f:
     lpi = f.readlines()
@@ -10,12 +15,14 @@ palist = [[],[],[],[]]
 curarnum = 0
 ialist = [['0','1','1','1'],['1','1','0','0'],['1','1','1','1'],['0','1','0','1']]
 running = True
+piplace = 0
 
 while running:
     if palist != ialist:
         for digit in pi:
             if len(palist[3]) <= (wrap-1):
                 palist[3].append(digit)
+                piplace += 1
             if len(palist[3]) == (wrap):
                 if len(palist[2]) != (wrap):
                     palist[2] = palist[3]
@@ -27,7 +34,8 @@ while running:
                     palist[0] = palist[1]
                     palist[1] = []
             if ialist == palist:
-                print("YES")
+                print(piplace, palist)
+                running = False
             elif len(palist[0]) == wrap and len(palist[1]) == wrap and len(palist[2]) == wrap and len(palist[3]) == wrap:
                 palist[0] = palist[1]
                 palist[1] = palist[2]
@@ -40,4 +48,4 @@ for digit in pi:
         vpi += ("░")
     else:
         vpi += ("█")
-print(vpi)
+print('\n'.join(textwrap.wrap(vpi[0 : piplace], 4)))
