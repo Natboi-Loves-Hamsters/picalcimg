@@ -2,6 +2,7 @@
 TO DO:
     --> Get logical help (stackoverflow would work)
     --> Streamline the palist function and make it not hardcoded to length of 4 (need logical help first)
+    Link picalc and main
     Add gui (Not a full rewrite but will require a lot of reworking)
     Check through all the wrap possibilities (WILL BE EXTREMELY PAINFUL AND REQUIRE FULL REWRITE OF CODE)
     DO THIS IN A BETTER LANGUAGE (Impossible for me)
