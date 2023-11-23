@@ -3,7 +3,7 @@ import textwrap
 
 wrap = 4
 
-with open('pi250000.dat') as f:
+with open('pi100000.dat') as f:
     lpi = f.readlines()
 for pi in lpi:
     continue
@@ -39,15 +39,21 @@ for digit in pi:
         palist[2] = palist[3]
         palist[3] = []
 
+imglnum = 0
 piplace = 0
 print("Printing")
 vpi = ""
 for digit in pi:
-    if piplace < imglist[0]:
-        if digit == '0':
-            vpi += ("░")
-        else:
-            vpi += ("█")
-        piplace += 1
+    if digit == '0':
+        vpi += ("░")
+    else:
+        vpi += ("█")
+    piplace += 1
+    if piplace == imglist[imglnum] - 16:
+        vpi += ('STRT')
+    if piplace == imglist[imglnum]:
+        vpi += ('END ')
+        if len(imglist) - 1 > imglnum:
+            imglnum += 1
 
-print('\n'.join(textwrap.wrap(vpi[0 : imglist[0]], 4)))
+print('\n'.join(textwrap.wrap(vpi, 4)))
