@@ -5,29 +5,73 @@ TO DO:
     Link picalc and main
     Add gui (Not a full rewrite but will require a lot of reworking)
     Check through all the wrap possibilities (WILL BE EXTREMELY PAINFUL AND REQUIRE FULL REWRITE OF CODE)
-    DO THIS IN A BETTER LANGUAGE (Impossible for me)
+    DO THIS IN A BETTER LANGUAGE (Impossible)
     Adapt into a video game (huh?)
     Figure out why x = y - 1 sometimes equals -y? (this is weird)
 '''
 
-import os
 import textwrap
+from picalc import piGen
+
+DIGITS = int(input("How many digits of pi?: "))
+
+# asks if you want to make pi
+unsolved = True
+pigenon = bool
+while unsolved:
+    initpigen = input("Do you wish to generate pi? (Y or N): ")
+    if initpigen == ('y') or initpigen == ('Y'):
+        pigenon = True
+        unsolved = False
+    if initpigen == ('n') or initpigen == ('N'):
+        pigenon = False
+        unsolved = False
+unsolved = True
+
+if pigenon:
+    cont = True
+    while unsolved:
+        save = input("Do you wish to save pi? (Y or N): ")
+        if save == 'y' or save == 'Y':
+            save = True
+            while unsolved:
+                cont = input("Do you wish to find the image? (Y or N): ")
+                if cont == 'y' or cont == 'Y':
+                    cont = True
+                    unsolved = False
+                if cont == 'n' or cont == 'N':
+                    cont = False
+                    unsolved = False
+        if save == 'n' or save == 'N':
+            save = False
+            unsolved = False
+    pi = piGen(DIGITS,save)
+    pi = pi[2:]
+    if not cont:
+        exit(2)
+
+else:
+    # opens pi file and assigns it to pi
+    DIGITS = str(DIGITS)
+    with open(f'pi{DIGITS}.dat') as f:
+        lpi = f.readlines()
+    for pi in lpi:
+        continue
+    pi = pi[2:]
 
 # sets wrap, and hopefully length soon. also make this accord to user input
 wrap = 4
+length = 4
 
-# opens pi file and assigns it to pi
-with open('pi100000.dat') as f:
-    lpi = f.readlines()
-for pi in lpi:
-    continue
-pi = pi[2:]
+# sets the length to which palist will fill
+palist = []
+for count in range(length):
+    palist.append([])
 
 # setting variables and the actual image
-palist = [[],[],[],[]]
 curarnum = 0
-# ialist = [['1','0','0','1'],['0','0','0','0'],['1','0','0','1',],['0','1','1','0']]
-ialist = [['0','1','1','1'],['1','1','0','0'],['1','1','1','1'],['0','1','0','1']]
+ialist = [['1','0','0','1'],['0','0','0','0'],['1','0','0','1',],['0','1','1','0']]
+# ialist = [['0','1','1','1'],['1','1','0','0'],['1','1','1','1'],['0','1','0','1']]
 piplace = 0
 imglist = []
 
@@ -46,7 +90,7 @@ for digit in pi:
         if len(palist[0]) != (wrap):
             palist[0] = palist[1]
             palist[1] = []
-    # This is what checks if it is equal to the image and adds the place it's at to another damn array
+    # This is what checks if it is equal to the image then adds the place it's at to another damn array
     if ialist == palist:
         print(piplace, palist)
         imglist.append(piplace)
