@@ -1,8 +1,7 @@
 '''
 TO DO:
     --> Get logical help (stackoverflow would work)
-    --> Streamline the palist function and make it not hardcoded to length of 4 (need logical help first)
-    Link picalc and main
+    --> Optimize code
     Add gui (Not a full rewrite but will require a lot of reworking)
     Check through all the wrap possibilities (WILL BE EXTREMELY PAINFUL AND REQUIRE FULL REWRITE OF CODE)
     DO THIS IN A BETTER LANGUAGE (Impossible)
@@ -65,8 +64,6 @@ length = 4
 
 # sets the length to which palist will fill
 palist = []
-# for count in range(length):
-#     palist.append([])
 
 # setting variables and the actual image
 curarnum = 0
@@ -87,6 +84,7 @@ for digit in pi:
             piwrap = ""
 # This is what checks if it is equal to the image then adds the place it's at to another damn array
 piplace = 0
+tpip = 12
 totaldigit = len(palist)
 for digit in pi:
     pilist = []
@@ -97,9 +95,10 @@ for digit in pi:
         pilist.append(palist[lenint])
         lenint += 1
     piplace += 1
+    tpip += 4
     if ialist == pilist:
         print(piplace, pilist)
-        imglist.append(piplace)
+        imglist.append(tpip)
 
 if len(imglist) == 0:
     print("There is no image in this variation of pi. But here is visualized pi anyways.")
@@ -119,7 +118,7 @@ for digit in pi:
     # And this here puts the STRT and END where the images start and end
     if piplace == imglist[imglnum] - 16:
         vpi += ('STRT')
-    if piplace == imglist[imglnum] :
+    if piplace == imglist[imglnum]:
         vpi += ('END ')
         if len(imglist) - 1 > imglnum:
             imglnum += 1
