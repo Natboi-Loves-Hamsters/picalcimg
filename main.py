@@ -119,7 +119,7 @@ for digit in pi:
     # And this here puts the STRT and END where the images start and end
     if piplace == imglist[imglnum] - 16:
         vpi += ('STRT')
-    if piplace == imglist[imglnum]:
+    if piplace == imglist[imglnum] :
         vpi += ('END ')
         if len(imglist) - 1 > imglnum:
             imglnum += 1
