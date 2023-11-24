@@ -87,13 +87,13 @@ for digit in pi:
             piwrap = ""
 # This is what checks if it is equal to the image then adds the place it's at to another damn array
 piplace = 0
+totaldigit = len(palist)
 for digit in pi:
     pilist = []
     lenint = piplace
-    if lenint == totaldigit:
+    if (lenint + 4) == 83046:
         break
-    while (lenint < (length + piplace)) and ((lenint + 400) < totaldigit):
-        print(lenint, len(palist))
+    while (lenint < (length + piplace)) and (lenint < totaldigit):
         pilist.append(palist[lenint])
         lenint += 1
     piplace += 1
