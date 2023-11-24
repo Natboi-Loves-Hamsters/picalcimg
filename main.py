@@ -65,41 +65,41 @@ length = 4
 
 # sets the length to which palist will fill
 palist = []
-for count in range(length):
-    palist.append([])
+# for count in range(length):
+#     palist.append([])
 
 # setting variables and the actual image
 curarnum = 0
-ialist = [['1','0','0','1'],['0','0','0','0'],['1','0','0','1',],['0','1','1','0']]
-# ialist = [['0','1','1','1'],['1','1','0','0'],['1','1','1','1'],['0','1','0','1']]
+# ialist = [['1','0','0','1'],['0','0','0','0'],['1','0','0','1',],['0','1','1','0']]
+ialist = ['0111','1100','1111','0101']
 piplace = 0
 imglist = []
+piwrap = ""
+totaldigit = len(pi)
 
-# This is the horribly optimized code that cycles through pi and assigns it to arrays
+# This is the sub-optimized code that cycles through pi and assigns it to arrays
 for digit in pi:
-    if len(palist[3]) <= (wrap-1):
-        palist[3].append(digit)
-        piplace += 1
-    if len(palist[3]) == (wrap):
-        if len(palist[2]) != (wrap):
-            palist[2] = palist[3]
-            palist[3] = []
-        if len(palist[1]) != (wrap):
-            palist[1] = palist[2]
-            palist[2] = []
-        if len(palist[0]) != (wrap):
-            palist[0] = palist[1]
-            palist[1] = []
-    # This is what checks if it is equal to the image then adds the place it's at to another damn array
-    if ialist == palist:
-        print(piplace, palist)
+    piplace += 1
+    if len(piwrap) < wrap:
+        piwrap += digit
+        if (len(piwrap) == wrap) or (piplace == totaldigit):
+            palist.append(piwrap)
+            piwrap = ""
+# This is what checks if it is equal to the image then adds the place it's at to another damn array
+piplace = 0
+for digit in pi:
+    pilist = []
+    lenint = piplace
+    if lenint == totaldigit:
+        break
+    while (lenint < (length + piplace)) and ((lenint + 400) < totaldigit):
+        print(lenint, len(palist))
+        pilist.append(palist[lenint])
+        lenint += 1
+    piplace += 1
+    if ialist == pilist:
+        print(piplace, pilist)
         imglist.append(piplace)
-    # This cycles everything up when it is all filled up
-    if len(palist[0]) == wrap and len(palist[1]) == wrap and len(palist[2]) == wrap and len(palist[3]) == wrap:
-        palist[0] = palist[1]
-        palist[1] = palist[2]
-        palist[2] = palist[3]
-        palist[3] = []
 
 if len(imglist) == 0:
     print("There is no image in this variation of pi. But here is visualized pi anyways.")
