@@ -54,9 +54,7 @@ else:
     DIGITS = str(DIGITS)
     with open(f'pi{DIGITS}.dat') as f:
         lpi = f.readlines()
-    pi: str
-    for pi in lpi:
-        continue
+    pi = lpi[0]
     pi = pi[2:]
 
 # sets wrap, and hopefully length soon. also make this accord to user input
