@@ -4,7 +4,7 @@ import time
 # import sys
 # sys.set_int_max_str_digits(999999999)
 
-def piGen(DIGITS,save):
+def piGen(DIGITS,save = False):
 
     if not save:
         global pi

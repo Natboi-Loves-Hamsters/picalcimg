@@ -1,4 +1,4 @@
-'''
+"""
 TO DO:
     --> Get logical help (stackoverflow would work)
     --> Optimize code
@@ -7,7 +7,7 @@ TO DO:
     DO THIS IN A BETTER LANGUAGE (Impossible)
     Adapt into a video game (huh?)
     Figure out why x = y - 1 sometimes equals -y? (this is weird)
-'''
+"""
 
 import textwrap
 from picalc import piGen
@@ -19,10 +19,10 @@ unsolved = True
 pigenon = bool
 while unsolved:
     initpigen = input("Do you wish to generate pi? (Y or N): ")
-    if initpigen == ('y') or initpigen == ('Y'):
+    if initpigen == 'y' or initpigen == 'Y':
         pigenon = True
         unsolved = False
-    if initpigen == ('n') or initpigen == ('N'):
+    if initpigen == 'n' or initpigen == 'N':
         pigenon = False
         unsolved = False
 unsolved = True
@@ -44,7 +44,7 @@ if pigenon:
         if save == 'n' or save == 'N':
             save = False
             unsolved = False
-    pi = piGen(DIGITS,save)
+    pi = piGen(DIGITS)
     pi = pi[2:]
     if not cont:
         exit(2)
@@ -54,6 +54,7 @@ else:
     DIGITS = str(DIGITS)
     with open(f'pi{DIGITS}.dat') as f:
         lpi = f.readlines()
+    pi: str
     for pi in lpi:
         continue
     pi = pi[2:]
@@ -68,7 +69,7 @@ palist = []
 # setting variables and the actual image
 curarnum = 0
 # ialist = ['1001','0000'],'1001','0110']
-ialist = ['0111','1100','1111','0101']
+ialist = ['0111', '1100', '1111', '0101']
 piplace = 0
 imglist = []
 piwrap = ""
@@ -84,18 +85,16 @@ for digit in pi:
             piwrap = ""
 # This is what checks if it is equal to the image then adds the place it's at to another damn array
 piplace = 0
-tpip = 12
+tpip = wrap * (length - 1)
 totaldigit = len(palist)
 for digit in pi:
     pilist = []
     lenint = piplace
-    if (lenint + 4) == 83046:
-        break
     while (lenint < (length + piplace)) and (lenint < totaldigit):
         pilist.append(palist[lenint])
         lenint += 1
     piplace += 1
-    tpip += 4
+    tpip += wrap
     if ialist == pilist:
         print(tpip, pilist)
         imglist.append(tpip)
@@ -127,15 +126,15 @@ elif len(endtext) != wrap:
 # This processes the 1s and 0s to the image
 for digit in pi:
     if digit == '0':
-        vpi += ("░")
+        vpi += "░"
     else:
-        vpi += ("█")
+        vpi += "█"
     piplace += 1
     # And this here puts the START and END where the images start and end
-    if piplace == imglist[imglnum] - 16:
-        vpi += (starttext)
+    if piplace == imglist[imglnum] - wrap * length:
+        vpi += starttext
     if piplace == imglist[imglnum]:
-        vpi += (endtext)
+        vpi += endtext
         if len(imglist) - 1 > imglnum:
             imglnum += 1
 
