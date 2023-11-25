@@ -67,7 +67,7 @@ palist = []
 
 # setting variables and the actual image
 curarnum = 0
-# ialist = [['1','0','0','1'],['0','0','0','0'],['1','0','0','1',],['0','1','1','0']]
+# ialist = ['1001','0000'],'1001','0110']
 ialist = ['0111','1100','1111','0101']
 piplace = 0
 imglist = []
@@ -97,29 +97,45 @@ for digit in pi:
     piplace += 1
     tpip += 4
     if ialist == pilist:
-        print(piplace, pilist)
+        print(tpip, pilist)
         imglist.append(tpip)
 
 if len(imglist) == 0:
     print("There is no image in this variation of pi. But here is visualized pi anyways.")
-    imglist.append(piplace+17)
+    imglist.append(tpip+300)
 
-# This processes the 1s and 0s to the image
+# constants and a print
 imglnum = 0
 piplace = 0
 print("Printing")
 vpi = ""
+
+# this decides how much of the start and end text you need
+starttext = "START"
+endtext = "END"
+if len(starttext) < wrap:
+    starttext += " " * (wrap - len(starttext))
+elif len(starttext) != wrap:
+    d = wrap - len(starttext)
+    starttext = starttext[:d]
+if len(endtext) < wrap:
+    endtext += " " * (wrap - len(endtext))
+elif len(endtext) != wrap:
+    d = wrap - len(endtext)
+    endtext = endtext[:d]
+
+# This processes the 1s and 0s to the image
 for digit in pi:
     if digit == '0':
         vpi += ("░")
     else:
         vpi += ("█")
     piplace += 1
-    # And this here puts the STRT and END where the images start and end
+    # And this here puts the START and END where the images start and end
     if piplace == imglist[imglnum] - 16:
-        vpi += ('STRT')
+        vpi += (starttext)
     if piplace == imglist[imglnum]:
-        vpi += ('END ')
+        vpi += (endtext)
         if len(imglist) - 1 > imglnum:
             imglnum += 1
 
