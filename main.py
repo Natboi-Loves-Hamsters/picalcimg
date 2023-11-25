@@ -1,4 +1,3 @@
-
 """
 TO DO:
     --> Get logical help (stackoverflow would work)
@@ -30,6 +29,7 @@ while unsolved:
         unsolved = False
 unsolved = True
 
+# questions for generating pi after linking the scripts
 if pigenon:
     cont = True
     while unsolved:
@@ -66,10 +66,6 @@ else:
 wrap = 4
 length = 4
 
-# sets the length to which palist will fill
-palist = []
-
-
 # setting variables and the actual image
 curarnum = 0
 # ialist = ['1001','0000'],'1001','0110']
@@ -78,6 +74,7 @@ piplace = 0
 imglist = []
 piwrap = ""
 totaldigit = len(pi)
+palist = []
 
 # This is the sub-optimized code that cycles through pi and assigns it to arrays
 for digit in pi:
@@ -87,6 +84,7 @@ for digit in pi:
         if (len(piwrap) == wrap) or (piplace == totaldigit):
             palist.append(piwrap)
             piwrap = ""
+
 # This is what checks if it is equal to the image then adds the place it's at to another damn array
 piplace = 0
 tpip = wrap * (length - 1)
