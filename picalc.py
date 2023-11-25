@@ -1,22 +1,19 @@
-import numpy as np
 import time
 
 # Linux
 # import sys
 # sys.set_int_max_str_digits(999999999)
-# DIGITS = int(input("How many digits of pi do you require?: "))
 
-def piGen(DIGITS,save):
+def piGen(DIGITS,save = False):
 
     if not save:
         global pi
     def pi_digits(x):
-        """Generate x digits of Pi."""
+
         k,a,b,a1,b1 = 2,4,1,12,4
         goes = 0
         it = time.time()
         st = it
-        runs = 0
         totaltime = 0
         while x > 0:
             p,q,k = k * k, 2 * k + 1, k + 1
@@ -37,21 +34,10 @@ def piGen(DIGITS,save):
                         tbf = ips / (x / 1000)
                         tbf = x / tbf
                         tbf *= 1.05
-                        tbf += tbf * 0.15
+                        tbf += tbf * 0.05
                         print(f"Estimated {tbf:.2f} seconds till finish.\n")
                     print(f"Elapsed time: {totaltime:.2f} out of {tbf:.2f}")
                     print(f"Percentage finished: {goes / DIGITS * 100:.2f}%\n")
-
-                """ Alternate time till finish """
-                # if goes % 1000 == 0:
-                #     runs += 1
-                #     ips = time.time() - st
-                #     st = time.time()
-                #     totaltime = totaltime + ips
-                #     totaltime /= runs
-                #     if x != 0:
-                #         tbf = x * totaltime / 100
-                #         print(f"Time remaining: {tbf:.2f}\nDigits remaining: {x}\n")
 
         print("True time to finish:", time.time() - it)
 
@@ -67,4 +53,3 @@ def piGen(DIGITS,save):
             file.write(pi)
 
     return(pi)
-# print(piGen(DIGITS,True))

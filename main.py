@@ -1,14 +1,15 @@
-'''
+
+"""
 TO DO:
     --> Get logical help (stackoverflow would work)
-    --> Streamline the palist function and make it not hardcoded to length of 4 (need logical help first)
-    Link picalc and main
+    --> Optimize code
     Add gui (Not a full rewrite but will require a lot of reworking)
     Check through all the wrap possibilities (WILL BE EXTREMELY PAINFUL AND REQUIRE FULL REWRITE OF CODE)
     DO THIS IN A BETTER LANGUAGE (Impossible)
     Adapt into a video game (huh?)
     Figure out why x = y - 1 sometimes equals -y? (this is weird)
-'''
+
+"""
 
 import textwrap
 from picalc import piGen
@@ -20,10 +21,11 @@ unsolved = True
 pigenon = bool
 while unsolved:
     initpigen = input("Do you wish to generate pi? (Y or N): ")
-    if initpigen == ('y') or initpigen == ('Y'):
+
+    if initpigen == 'y' or initpigen == 'Y':
         pigenon = True
         unsolved = False
-    if initpigen == ('n') or initpigen == ('N'):
+    if initpigen == 'n' or initpigen == 'N':
         pigenon = False
         unsolved = False
 unsolved = True
@@ -45,7 +47,8 @@ if pigenon:
         if save == 'n' or save == 'N':
             save = False
             unsolved = False
-    pi = piGen(DIGITS,save)
+            
+    pi = piGen(DIGITS)
     pi = pi[2:]
     if not cont:
         exit(2)
@@ -55,8 +58,8 @@ else:
     DIGITS = str(DIGITS)
     with open(f'pi{DIGITS}.dat') as f:
         lpi = f.readlines()
-    for pi in lpi:
-        continue
+
+    pi = lpi[0]
     pi = pi[2:]
 
 # sets wrap, and hopefully length soon. also make this accord to user input
@@ -65,62 +68,77 @@ length = 4
 
 # sets the length to which palist will fill
 palist = []
-for count in range(length):
-    palist.append([])
+
 
 # setting variables and the actual image
 curarnum = 0
-ialist = [['1','0','0','1'],['0','0','0','0'],['1','0','0','1',],['0','1','1','0']]
-# ialist = [['0','1','1','1'],['1','1','0','0'],['1','1','1','1'],['0','1','0','1']]
+# ialist = ['1001','0000'],'1001','0110']
+ialist = ['0111', '1100', '1111', '0101']
 piplace = 0
 imglist = []
+piwrap = ""
+totaldigit = len(pi)
 
-# This is the horribly optimized code that cycles through pi and assigns it to arrays
+# This is the sub-optimized code that cycles through pi and assigns it to arrays
 for digit in pi:
-    if len(palist[3]) <= (wrap-1):
-        palist[3].append(digit)
-        piplace += 1
-    if len(palist[3]) == (wrap):
-        if len(palist[2]) != (wrap):
-            palist[2] = palist[3]
-            palist[3] = []
-        if len(palist[1]) != (wrap):
-            palist[1] = palist[2]
-            palist[2] = []
-        if len(palist[0]) != (wrap):
-            palist[0] = palist[1]
-            palist[1] = []
-    # This is what checks if it is equal to the image then adds the place it's at to another damn array
-    if ialist == palist:
-        print(piplace, palist)
-        imglist.append(piplace)
-    # This cycles everything up when it is all filled up
-    if len(palist[0]) == wrap and len(palist[1]) == wrap and len(palist[2]) == wrap and len(palist[3]) == wrap:
-        palist[0] = palist[1]
-        palist[1] = palist[2]
-        palist[2] = palist[3]
-        palist[3] = []
+    piplace += 1
+    if len(piwrap) < wrap:
+        piwrap += digit
+        if (len(piwrap) == wrap) or (piplace == totaldigit):
+            palist.append(piwrap)
+            piwrap = ""
+# This is what checks if it is equal to the image then adds the place it's at to another damn array
+piplace = 0
+tpip = wrap * (length - 1)
+totaldigit = len(palist)
+for digit in pi:
+    pilist = []
+    lenint = piplace
+    while (lenint < (length + piplace)) and (lenint < totaldigit):
+        pilist.append(palist[lenint])
+        lenint += 1
+    piplace += 1
+    tpip += wrap
+    if ialist == pilist:
+        print(tpip, pilist)
+        imglist.append(tpip)
 
 if len(imglist) == 0:
     print("There is no image in this variation of pi. But here is visualized pi anyways.")
-    imglist.append(piplace+17)
+    imglist.append(tpip+300)
 
-# This processes the 1s and 0s to the image
+# constants and a print
 imglnum = 0
 piplace = 0
 print("Printing")
 vpi = ""
+
+# this decides how much of the start and end text you need
+starttext = "START"
+endtext = "END"
+if len(starttext) < wrap:
+    starttext += " " * (wrap - len(starttext))
+elif len(starttext) != wrap:
+    d = wrap - len(starttext)
+    starttext = starttext[:d]
+if len(endtext) < wrap:
+    endtext += " " * (wrap - len(endtext))
+elif len(endtext) != wrap:
+    d = wrap - len(endtext)
+    endtext = endtext[:d]
+
+# This processes the 1s and 0s to the image
 for digit in pi:
     if digit == '0':
-        vpi += ("░")
+        vpi += "░"
     else:
-        vpi += ("█")
+        vpi += "█"
     piplace += 1
-    # And this here puts the STRT and END where the images start and end
-    if piplace == imglist[imglnum] - 16:
-        vpi += ('STRT')
+    # And this here puts the START and END where the images start and end
+    if piplace == imglist[imglnum] - wrap * length:
+        vpi += starttext
     if piplace == imglist[imglnum]:
-        vpi += ('END ')
+        vpi += endtext
         if len(imglist) - 1 > imglnum:
             imglnum += 1
 
