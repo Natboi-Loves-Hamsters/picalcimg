@@ -1,3 +1,4 @@
+
 """
 TO DO:
     --> Get logical help (stackoverflow would work)
@@ -7,6 +8,7 @@ TO DO:
     DO THIS IN A BETTER LANGUAGE (Impossible)
     Adapt into a video game (huh?)
     Figure out why x = y - 1 sometimes equals -y? (this is weird)
+
 """
 
 import textwrap
@@ -19,6 +21,7 @@ unsolved = True
 pigenon = bool
 while unsolved:
     initpigen = input("Do you wish to generate pi? (Y or N): ")
+
     if initpigen == 'y' or initpigen == 'Y':
         pigenon = True
         unsolved = False
@@ -44,6 +47,7 @@ if pigenon:
         if save == 'n' or save == 'N':
             save = False
             unsolved = False
+            
     pi = piGen(DIGITS)
     pi = pi[2:]
     if not cont:
@@ -54,6 +58,7 @@ else:
     DIGITS = str(DIGITS)
     with open(f'pi{DIGITS}.dat') as f:
         lpi = f.readlines()
+
     pi = lpi[0]
     pi = pi[2:]
 
@@ -63,6 +68,7 @@ length = 4
 
 # sets the length to which palist will fill
 palist = []
+
 
 # setting variables and the actual image
 curarnum = 0

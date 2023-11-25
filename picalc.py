@@ -9,6 +9,7 @@ def piGen(DIGITS,save = False):
     if not save:
         global pi
     def pi_digits(x):
+
         k,a,b,a1,b1 = 2,4,1,12,4
         goes = 0
         it = time.time()
