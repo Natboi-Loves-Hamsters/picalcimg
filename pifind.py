@@ -1,9 +1,12 @@
 from picalc import piGen, piSearch
 
+dig = int(input("What digit do you want pi to start at?: "))
 finaldig = int(input("What digit do you want pi searched till?: "))
 save = True
-dig = 2
-ialist = ['0111', '1100', '1111', '0101']
+if dig < 2:
+    dig = 2
+# ialist = ['0111', '1100', '1111', '0101']
+ialist = ['1001','0000','1001','0110']
 if save:
     with open(f'pifull{finaldig}.dat', 'w', encoding="utf-8") as file:
         file.write('')
