@@ -10,8 +10,7 @@ TO DO:
 
 """
 
-import textwrap
-from picalc import piGen
+from picalc import piGen, piSearch
 
 DIGITS = int(input("How many digits of pi?: "))
 
@@ -47,7 +46,7 @@ if pigenon:
         if save == 'n' or save == 'N':
             save = False
             unsolved = False
-            
+
     pi = piGen(DIGITS)
     pi = pi[2:]
     if not cont:
@@ -62,83 +61,6 @@ else:
     pi = lpi[0]
     pi = pi[2:]
 
-# sets wrap, and hopefully length soon. also make this accord to user input
-wrap = 4
-length = 4
-
-# setting variables and the actual image
-curarnum = 0
 # ialist = ['1001','0000'],'1001','0110']
 ialist = ['0111', '1100', '1111', '0101']
-piplace = 0
-imglist = []
-piwrap = ""
-totaldigit = len(pi)
-palist = []
-
-# This is the sub-optimized code that cycles through pi and assigns it to arrays
-for digit in pi:
-    piplace += 1
-    if len(piwrap) < wrap:
-        piwrap += digit
-        if (len(piwrap) == wrap) or (piplace == totaldigit):
-            palist.append(piwrap)
-            piwrap = ""
-
-# This is what checks if it is equal to the image then adds the place it's at to another damn array
-piplace = 0
-tpip = wrap * (length - 1)
-totaldigit = len(palist)
-for digit in pi:
-    pilist = []
-    lenint = piplace
-    while (lenint < (length + piplace)) and (lenint < totaldigit):
-        pilist.append(palist[lenint])
-        lenint += 1
-    piplace += 1
-    tpip += wrap
-    if ialist == pilist:
-        print(tpip, pilist)
-        imglist.append(tpip)
-
-if len(imglist) == 0:
-    print("There is no image in this variation of pi. But here is visualized pi anyways.")
-    imglist.append(tpip+300)
-
-# constants and a print
-imglnum = 0
-piplace = 0
-print("Printing")
-vpi = ""
-
-# this decides how much of the start and end text you need
-starttext = "START"
-endtext = "END"
-if len(starttext) < wrap:
-    starttext += " " * (wrap - len(starttext))
-elif len(starttext) != wrap:
-    d = wrap - len(starttext)
-    starttext = starttext[:d]
-if len(endtext) < wrap:
-    endtext += " " * (wrap - len(endtext))
-elif len(endtext) != wrap:
-    d = wrap - len(endtext)
-    endtext = endtext[:d]
-
-# This processes the 1s and 0s to the image
-for digit in pi:
-    if digit == '0':
-        vpi += "░"
-    else:
-        vpi += "█"
-    piplace += 1
-    # And this here puts the START and END where the images start and end
-    if piplace == imglist[imglnum] - wrap * length:
-        vpi += starttext
-    if piplace == imglist[imglnum]:
-        vpi += endtext
-        if len(imglist) - 1 > imglnum:
-            imglnum += 1
-
-# Finally for the only good bit, the print function. It wraps it by the wrap that is set
-print('\n'.join(textwrap.wrap(vpi, wrap)))
+piSearch(pi,ialist)
