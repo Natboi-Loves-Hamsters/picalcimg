@@ -1,4 +1,5 @@
 from main import piGen, piSearch
+import time
 
 dig = int(input("What digit do you want pi to start at?: "))
 finaldig = int(input("What digit do you want pi searched till?: "))
@@ -11,6 +12,8 @@ if save:
     with open(f'pifull{finaldig}.dat', 'w', encoding="utf-8") as file:
         file.write('')
 
+it = time.time()
+
 while finaldig > dig:
     pi = piGen(dig, False, False)
     pi = pi[2:]
@@ -22,3 +25,5 @@ while finaldig > dig:
     dig += 1
     if dig == 1000 and finaldig != 1000:
         dig += 1
+
+print(f"Total time taken:{time.time() - it}")
