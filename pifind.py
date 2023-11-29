@@ -1,4 +1,4 @@
-from picalc import piGen, piSearch
+from main import piGen, piSearch
 
 dig = int(input("What digit do you want pi to start at?: "))
 finaldig = int(input("What digit do you want pi searched till?: "))
