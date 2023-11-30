@@ -1,8 +1,9 @@
 import time
+import sys
 
-# Linux
-# import sys
-# sys.set_int_max_str_digits(999999999)
+
+if sys.platform != "win32":
+    sys.set_int_max_str_digits(999999999)
 
 def piGen(DIGITS,save = False,verbose = True):
 
