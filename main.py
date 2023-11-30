@@ -1,11 +1,10 @@
 import time
 import sys
 
-
 if sys.platform != "win32":
     sys.set_int_max_str_digits(999999999)
 
-def piGen(DIGITS,save = False,verbose = True):
+def piGen(DIGITS,save = False,verbose = True,binary = True):
 
     if not save:
         global pi
@@ -48,7 +47,11 @@ def piGen(DIGITS,save = False,verbose = True):
 
     pi = pi[2:]
     pi = int(pi)
-    pi = bin(pi)
+
+    if binary:
+        pi = bin(pi)
+    else:
+        pi = float(pi)
 
     if save:
         with open(f'pi{DIGITS}.dat', 'w') as file:
@@ -57,7 +60,10 @@ def piGen(DIGITS,save = False,verbose = True):
     return(pi)
 
 def piSearch(pi, ialist, verbose = True):
-    # setting variables and the actual image
+
+    # setting variables\
+    if pi != bin:
+        bin(pi)
 
     length = len(ialist)
     wrap = len(ialist[0])
