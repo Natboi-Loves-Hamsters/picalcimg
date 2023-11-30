@@ -26,16 +26,15 @@ def piGen(DIGITS,save = False,verbose = True):
                 a,a1 = 10*(a % b), 10*(a1 % b1)
                 d,d1 = a/b, a1/b1
                 goes += 1
-                if goes % 1000 == 0:
+                if goes % 1000 == 0 and verbose:
                     ips = time.time() - st
-                    totaltime = totaltime + ips
+                    totaltime += ips
                     st = time.time()
                     if goes == 1000:
                         ips = 1000 / ips
                         tbf = ips / (x / 1000)
                         tbf = x / tbf
-                        tbf *= 1.05
-                        tbf += tbf * 0.05
+                        tbf *= 1.1
                         if verbose:
                             print(f"Estimated {tbf:.2f} seconds till finish.\n")
                     if verbose:
@@ -120,7 +119,7 @@ def piSearch(pi, ialist, verbose = True):
         d = wrap - len(endtext)
         endtext = endtext[:d]
 
-    # This processes the 1s and 0s to the image
+    # This processes the 1s and 0s to the image and adds new lines
     for digit in pi:
         if digit == '0':
             vpi += "░"
@@ -137,7 +136,7 @@ def piSearch(pi, ialist, verbose = True):
             if len(imglist) - 1 > imglnum:
                 imglnum += 1
 
-    # Finally for the only good bit, the print function. It wraps it by the wrap that is set
+    # Finally the print function, printing the already formatted visualized pi.
     if verbose:
         print(vpi)
     return(vpi)
