@@ -61,9 +61,9 @@ def piGen(DIGITS,save = False,verbose = True,binary = True):
 
 def piSearch(pi, ialist, verbose = True):
 
-    # setting variables\
-    if pi != bin:
-        bin(pi)
+    # setting variables
+    if pi != str:
+        str(pi)
 
     length = len(ialist)
     wrap = len(ialist[0])

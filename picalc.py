@@ -1,10 +1,10 @@
 """
 TO DO:
     --> Optimize code
-    --> Add multiple ialist options (Probably want to put the lists in an array)
     Add gui (Not a full rewrite but will require a lot of reworking)
     Check through all the wrap possibilities (WILL BE EXTREMELY PAINFUL AND REQUIRE FULL REWRITE OF CODE)
     Figure out why x = y - 1 sometimes equals -y? (this is weird)
+    Add multiple ialist options (Probably want to put the lists in an array) (Why though?)
 
 """
 
