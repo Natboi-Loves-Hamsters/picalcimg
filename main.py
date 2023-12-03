@@ -1,7 +1,7 @@
 import time
 import sys
 
-if sys.platform != "win32":
+if sys.platform == "linux" or sys.platform == "linux2":
     sys.set_int_max_str_digits(999999999)
 
 def piGen(DIGITS,save = False,verbose = True,binary = True):
