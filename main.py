@@ -59,7 +59,7 @@ def piGen(DIGITS,save = False,verbose = True,binary = True):
 
     return(pi)
 
-def piSearch(pi, ialist, verbose = True):
+def piSearch(pi, ialist, verbose = True, positions = False):
 
     # setting variables
     if pi != str:
@@ -145,4 +145,7 @@ def piSearch(pi, ialist, verbose = True):
     # Finally the print function, printing the already formatted visualized pi.
     if verbose:
         print(vpi)
-    return(vpi)
+    if positions:
+        return(imglist)
+    else:
+        return(vpi)
