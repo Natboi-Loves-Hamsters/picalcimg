@@ -101,7 +101,7 @@ def piSearch(pi, ialist, verbose = True, positions = False):
 
     if len(imglist) == 0 and verbose:
         print("There is no image in this variation of pi. But here is visualized pi anyways.")
-    imglist.append(tpip+300)
+        imglist.append(tpip)
 
     # constants and a print
 

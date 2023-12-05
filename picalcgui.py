@@ -17,8 +17,8 @@ column1 = [
 ]
 
 column2 = [
-    [sg.Button(key='next', button_text="˄",enable_events=True)],
-    [sg.Button(key='prev', button_text="˅",enable_events=True)]
+    [sg.Button(key='up', button_text="˄",enable_events=True)],
+    [sg.Button(key='down', button_text="˅",enable_events=True)]
 ]
 
 layout = [[sg.Column(column1,element_justification='center'), sg.VSep(pad=(5)), sg.MLine(key='vpigui'+sg.WRITE_ONLY_KEY, size=(wrap * 2,8)), sg.Column(column2)]]
@@ -29,12 +29,14 @@ print = lambda *args, **kwargs: window['vpigui' + sg.WRITE_ONLY_KEY].print(*args
 
 initpigen = True
 save = False
-piimgplace = 0
 imglist = []
+guiplace = 0
 
 while not sg.WINDOW_CLOSED:
     event = False
     DIGITS = 0
+    piimgplace = len(imglist) - 1
+
     while DIGITS < 2 or DIGITS == 1000:
         while event != 'submit':
             event, values = window.read()
@@ -44,12 +46,15 @@ while not sg.WINDOW_CLOSED:
                 initpigen = values['initpigen']
             if event == 'save':
                 save = values['save']
-            if event == 'next' and piimgplace < (len(imglist) - 1):
-                piimgplace += 1
-                window["vpigui"+sg.WRITE_ONLY_KEY].Widget.see(imglist[piimgplace])
-            if event == 'prev' and piimgplace > 0:
+
+            if event == 'up' and piimgplace > 0:
                 piimgplace -= 1
-                window["vpigui"+sg.WRITE_ONLY_KEY].Widget.see(imglist[piimgplace])
+                guiplace = str(imglist[piimgplace] / 4)
+                window["vpigui"+sg.WRITE_ONLY_KEY].Widget.see(guiplace)
+            if event == 'down' and (piimgplace < (len(imglist) - 1)):
+                piimgplace += 1
+                guiplace = str(imglist[piimgplace] / 4)
+                window["vpigui"+sg.WRITE_ONLY_KEY].Widget.see(guiplace)
 
         DIGITS = values[0]
         try:
@@ -58,15 +63,11 @@ while not sg.WINDOW_CLOSED:
             DIGITS = 0
             event = False
 
-    pi = 3
-
     if initpigen:
         if save:
-            print("Making and saving pi")
             pi = piGen(DIGITS, save=True)
             pi = pi[2:]
         else:
-            print("Making pi")
             pi = piGen(DIGITS)
             pi = pi[2:]
 
@@ -78,10 +79,9 @@ while not sg.WINDOW_CLOSED:
         pi = lpi[0]
         pi = pi[2:]
 
-    num = 1
-    print("Searching pi")
     vpi = piSearch(pi,ialist, verbose=False)
     imglist = piSearch(pi,ialist, verbose=False, positions=True)
 
     window['vpigui'+sg.WRITE_ONLY_KEY].Update('')
     print(vpi)
+
