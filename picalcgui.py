@@ -6,8 +6,9 @@ sg.theme('SystemDefaultForReal')
 
 # ialist = ['1001','0000'],'1001','0110']
 ialist = ['0111', '1100', '1111', '0101']
-wrap = len(ialist)
 
+wrap = len(ialist)
+imglist = []
 
 column1 = [
     [sg.Text('How many digits of pi?'),sg.InputText(size=(10))],
@@ -17,11 +18,16 @@ column1 = [
 ]
 
 column2 = [
+    [sg.Text(f"# of times: {len(imglist)}", key='numof')],
+    [sg.Output(key='vpigui'+sg.WRITE_ONLY_KEY, size=(wrap * 2,8))]
+]
+
+column3 = [
     [sg.Button(key='up', button_text="˄",enable_events=True)],
     [sg.Button(key='down', button_text="˅",enable_events=True)]
 ]
 
-layout = [[sg.Column(column1,element_justification='center'), sg.VSep(pad=(5)), sg.MLine(key='vpigui'+sg.WRITE_ONLY_KEY, size=(wrap * 2,8)), sg.Column(column2)]]
+layout = [[sg.Column(column1,element_justification='center'), sg.VSep(pad=(5)), sg.Column(column2), sg.Column(column3)]]
 
 window = sg.Window("piCalcGui", layout, margins=(10,10), icon="icon.ico")
 
@@ -29,13 +35,12 @@ print = lambda *args, **kwargs: window['vpigui' + sg.WRITE_ONLY_KEY].print(*args
 
 initpigen = True
 save = False
-imglist = []
 guiplace = 0
 
 while not sg.WINDOW_CLOSED:
     event = False
     DIGITS = 0
-    piimgplace = len(imglist) - 1
+    piimgplace = len(imglist)
 
     while DIGITS < 2 or DIGITS == 1000:
         while event != 'submit':
@@ -83,5 +88,6 @@ while not sg.WINDOW_CLOSED:
     imglist = piSearch(pi,ialist, verbose=False, positions=True)
 
     window['vpigui'+sg.WRITE_ONLY_KEY].Update('')
+    window['numof'].update(value=f"# of times: {len(imglist)}")
     print(vpi)
 
