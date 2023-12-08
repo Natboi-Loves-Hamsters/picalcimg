@@ -62,9 +62,6 @@ def piGen(DIGITS,save = False,verbose = True,binary = True):
 def piSearch(pi, ialist, verbose = True, positions = False):
 
     # setting variables
-    if pi != str:
-        str(pi)
-
     length = len(ialist)
     wrap = len(ialist[0])
 
@@ -99,9 +96,10 @@ def piSearch(pi, ialist, verbose = True, positions = False):
             print(tpip, pilist)
             imglist.append(tpip)
 
-    if len(imglist) == 0 and verbose:
-        print("There is no image in this variation of pi. But here is visualized pi anyways.")
-        imglist.append(tpip)
+    if len(imglist) == 0:
+        if verbose:
+            print("There is no image in this variation of pi. But here is visualized pi anyways.")
+        imglist.append(0)
 
     # constants and a print
 

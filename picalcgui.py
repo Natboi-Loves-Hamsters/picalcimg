@@ -31,8 +31,6 @@ layout = [[sg.Column(column1,element_justification='center'), sg.VSep(pad=(5)), 
 
 window = sg.Window("piCalcGui", layout, margins=(10,10), icon="icon.ico")
 
-print = lambda *args, **kwargs: window['vpigui' + sg.WRITE_ONLY_KEY].print(*args, **kwargs)
-
 initpigen = True
 save = False
 guiplace = 0
@@ -40,6 +38,12 @@ guiplace = 0
 while not sg.WINDOW_CLOSED:
     event = False
     DIGITS = 0
+    try:
+        if imglist[0] == 0:
+            imglist = []
+        window['numof'].update(value=f"# of times: {len(imglist)}")
+    except:
+        pass
     piimgplace = len(imglist)
 
     while DIGITS < 2 or DIGITS == 1000:
@@ -75,7 +79,6 @@ while not sg.WINDOW_CLOSED:
         else:
             pi = piGen(DIGITS)
             pi = pi[2:]
-
     else:
         # opens pi file and assigns it to pi
         DIGITS = str(DIGITS)
@@ -84,10 +87,9 @@ while not sg.WINDOW_CLOSED:
         pi = lpi[0]
         pi = pi[2:]
 
-    vpi = piSearch(pi,ialist, verbose=False)
+    vpi = piSearch(pi,ialist,verbose=False)
     imglist = piSearch(pi,ialist, verbose=False, positions=True)
 
     window['vpigui'+sg.WRITE_ONLY_KEY].Update('')
-    window['numof'].update(value=f"# of times: {len(imglist)}")
     print(vpi)
 
